@@ -2951,10 +2951,10 @@ def matrix_set_diag(
 
 # pylint: enable=invalid-name
 
-
+from tensorflow.python.ops.math_ops import reduce_prod
 def _constant_if_small(value, shape, dtype, name):
   try:
-    if np.prod(shape) < 1000:
+    if reduce_prod(shape) < 1000:
       return constant(value, shape=shape, dtype=dtype, name=name)
   except (NotImplementedError, TypeError):
     # Happens when shape is a Tensor, list with Tensor elements, etc.
